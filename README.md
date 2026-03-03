@@ -4,13 +4,23 @@ A collection of skills for [Claude Code](https://docs.anthropic.com/en/docs/clau
 
 ## Quick Installation
 
-Install all skills globally:
+### Install All
+
+Install all skills globally (non-interactive):
 
 ```bash
 npx skills add hyf0/skills -g --all
 ```
 
-Or install individual skills:
+### Selective Installation
+
+For interactive installation where you can pick specific skills and agents:
+
+```bash
+npx skills add hyf0/skills -g
+```
+
+### Individual Skills
 
 | Skill | Command | Description |
 |-------|---------|-------------|
@@ -19,12 +29,6 @@ Or install individual skills:
 | `optimize-skill` | `npx skills add hyf0/skills -g --all --skill optimize-skill` | Improve existing skills for conciseness and discoverability |
 | `dev-announce` | `npx skills add hyf0/skills -g --all --skill dev-announce` | Generate data-driven feature announcement tweets |
 | `resolve-pr-comments` | `npx skills add hyf0/skills -g --all --skill resolve-pr-comments` | Review, fix, and resolve GitHub PR review comments |
-
-For interactive installation (pick specific skills and agents):
-
-```bash
-npx skills add hyf0/skills -g
-```
 
 ## Available Skills
 
