@@ -21,7 +21,7 @@ Review unresolved comments on a GitHub pull request, fix the code where comments
 
 ```
 - [ ] Step 1: Fetch unresolved review threads
-- [ ] Step 2: Read and understand each comment
+- [ ] Step 2: Understand the codebase and each comment
 - [ ] Step 3: For each comment, fix code or reply with disagreement
 - [ ] Step 4: Reply to each thread with reasoning
 - [ ] Step 5: Resolve all threads
@@ -59,12 +59,13 @@ query {
 
 Filter to threads where `isResolved == false`.
 
-## Step 2: Understand Each Comment
+## Step 2: Understand the Codebase and Each Comment
 
-For each unresolved thread:
-1. Read the comment body to understand what's being requested
-2. Read the referenced file and line to understand the current code
-3. Determine if the comment makes sense — does the suggestion improve correctness, consistency, or clarity?
+Before acting on comments, build sufficient understanding of the codebase:
+1. Read the PR diff to understand the full scope of changes
+2. Read surrounding code, related files, and existing patterns — not just the commented line
+3. For each unresolved thread, read the comment body to understand what's being requested
+4. Determine if the comment makes sense in the context of the codebase — does the suggestion improve correctness, consistency, or clarity?
 
 ## Step 3: Act on Each Comment
 
