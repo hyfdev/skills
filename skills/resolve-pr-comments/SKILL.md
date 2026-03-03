@@ -1,16 +1,6 @@
 ---
-description: |
-  Review and resolve GitHub PR review comments. Use when the user wants to address, fix, or resolve unresolved review comments on a pull request.
-  TRIGGER when: user says "resolve PR comments", "fix PR comments", "address review comments", "handle PR feedback", or provides a PR URL with instructions about unresolved comments.
-  Do NOT use for: creating PRs, reviewing code yourself, or general PR operations that don't involve resolving existing review comments.
-user-invocable: true
-allowed-tools:
-  - Bash(gh api *)
-  - Bash(gh pr view *)
-  - Read
-  - Edit
-  - Glob
-  - Grep
+name: resolve-pr-comments
+description: "Review and resolve GitHub PR review comments. Use when the user wants to address, fix, or resolve unresolved review comments on a pull request. TRIGGER when: user says \"resolve PR comments\", \"fix PR comments\", \"address review comments\", \"handle PR feedback\", or provides a PR URL with instructions about unresolved comments. Do NOT use for: creating PRs, reviewing code yourself, or general PR operations that don't involve resolving existing review comments."
 ---
 
 # Resolve PR Comments
@@ -99,5 +89,4 @@ mutation {
 ## Important
 
 - Always read the actual code before deciding whether a comment makes sense
-- Group related fixes into a single commit
 - Do not resolve threads without replying first — always leave a record of what was done and why
