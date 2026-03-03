@@ -25,7 +25,6 @@ Review unresolved comments on a GitHub pull request, fix the code where comments
 - [ ] Step 3: For each comment, fix code or reply with disagreement
 - [ ] Step 4: Reply to each thread with reasoning
 - [ ] Step 5: Resolve all threads
-- [ ] Step 6: Commit and push changes
 ```
 
 ## Step 1: Fetch Unresolved Threads
@@ -96,10 +95,6 @@ mutation {
   }
 }'
 ```
-
-## Step 6: Commit and Push
-
-If code changes were made, commit and push to the PR branch. Use a descriptive commit message referencing the review feedback.
 
 ## Important
 

@@ -44,6 +44,7 @@ Score each item as:
 - [ ] No orphan reference files (every file is linked from SKILL.md)
 - [ ] Headers use H3 (`###`) for categories within sections
 - [ ] Workflow steps are numbered
+- [ ] If the skill has a verification checklist, it appears near the top — not appended at the bottom
 - [ ] No README.md inside the skill folder
 
 ## Workflow Quality

@@ -90,22 +90,44 @@ Combine these with the architecture patterns above.
 
 ### Task List / Checklist Pattern (High Importance)
 
-For any multi-step workflow, provide a copyable checklist the agent copies into its response and checks off as it progresses.
+Checklists serve two distinct purposes depending on skill type:
+
+**Workflow checklists** — For multi-step workflows, provide a copyable checklist the agent copies into its response and checks off as it progresses.
+
+**Verification checklists** — For domain-knowledge skills, provide a checklist that verifies the knowledge was actually applied in the agent's output. Without this, the skill is just text the agent might read and ignore — there is no mechanism to confirm it was used.
 
 **Why this matters:**
-- Prevents the agent from skipping steps
-- Makes progress observable to the user
+- Prevents the agent from skipping steps or ignoring knowledge
+- Makes progress and compliance observable to the user
 - Creates a clear contract of what "done" means
 
-**Format:**
+**Placement:** Put checklists near the top of the skill when they define the agent's obligations. A checklist buried at the bottom becomes an afterthought — the agent focuses on what it reads first.
+
+**Workflow example:**
 ```markdown
+## Workflow
 Task Progress:
 - [ ] Step 1: [description]
 - [ ] Step 2: [description]
 - [ ] Step 3: [description]
 ```
 
-Include in the SKILL.md body for any workflow with 3+ steps.
+**Domain-knowledge (checklist-first) example:**
+```markdown
+# [Skill Name]
+
+[Opening line — why this knowledge matters]
+
+## Verification checklist
+- [ ] [Check that knowledge point 1 was applied]
+- [ ] [Check that knowledge point 2 was applied]
+- [ ] [Check that knowledge point 3 was applied]
+
+## [How it works — mental model]
+## [Details per check — expanding each item with examples]
+```
+
+Include a workflow checklist for any workflow with 3+ steps. Include a verification checklist for any domain-knowledge skill that teaches practices, constraints, or patterns the agent should apply.
 
 ### Examples Pattern
 
