@@ -72,6 +72,19 @@ npx skills add hyf0/skills -g --all --skill resolve-pr-comments
 
 - `/resolve-pr-comments https://github.com/owner/repo/pull/123` - Resolve comments on a specific PR
 
+### `/adversarial-workflow`
+
+Turn a one-line task into the full adversarial fan-out dynamic-workflow prompt — split into independent units, do the work on each in isolation, have multiple agents refute it, then build, test, and commit once at the end. Saves hand-typing the long workflow prompt.
+
+```bash
+npx skills add hyf0/skills -g --all --skill adversarial-workflow
+```
+
+- `/adversarial-workflow fix every finding in ./REPORT.md` - Generates the full workflow prompt for that task
+- `/adversarial-workflow` - Asks for the task, then generates the prompt
+
+> Based on the dynamic-workflow pattern [Jarred Sumner described](https://gist.github.com/hyf0-agent/c28398ee11c598366cb7675a79ec13f1) as part of rewriting Bun in Rust.
+
 ## License
 
 MIT
