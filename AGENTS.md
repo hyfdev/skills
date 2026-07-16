@@ -23,7 +23,6 @@ This repository is Yunfei He's public collection of reusable coding-agent skills
 - Published skills live under `skills/`. A skill is the directory that directly contains its `SKILL.md`; that directory name must match the skill's `name`.
 - A skill may include `scripts/` for deterministic or repeated operations, `references/` for material loaded on demand, and `assets/` for templates, images, icons, data, and other static resources used by the skill or client metadata.
 - A skill may include `agents/openai.yaml` for Codex-specific metadata such as display information or invocation policy. This is skill metadata, not a plugin manifest.
-- A skill may include `evals/` with scenario definitions, a run record, and named unverified coverage that document how the skill was tested; evals ship with the skill as maintainer documentation.
 - `README.md` is the public catalog and installation guide. It should let a visitor understand what each skill does, choose one, and install it for Claude Code or Codex.
 - Do not add empty skill directories, placeholder skills, or unfinished skills to `main`.
 
