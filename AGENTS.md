@@ -1,55 +1,66 @@
 # AGENTS.md
 
-## Repository purpose
+## Purpose
 
-This repository publishes reusable Agent Skills for both Claude Code and Codex. Each skill lives in `skills/<skill-name>/` with a `SKILL.md` entry point and optional `scripts/`, `references/`, `assets/`, and client-specific metadata.
+This repository is Yunfei He's public collection of reusable coding-agent skills. Treat `main` as a published catalog: every checked-in skill should be usable, documented, and ready for other people to install.
 
-## Best practices
+## Scope
 
-### Start with a portable core
+- Target Claude Code and Codex only.
+- Publish plain Agent Skills. Do not add Claude Code or Codex plugin manifests, marketplaces, plugin installation paths, or plugin release machinery.
+- Do not add compatibility files, installation instructions, or support claims for other coding agents.
+- Client-specific metadata is allowed when it is necessary for the same skill to behave correctly in Claude Code and Codex.
 
-- Use the open [Agent Skills specification](https://agentskills.io/specification) as the shared baseline. Keep `name` and `description` valid under the specification, make `name` match the skill directory, and describe both what the skill does and when it applies.
-- Keep the workflow in `SKILL.md` useful in both Claude Code and Codex. Prefer agent-neutral language, capabilities, inputs, and outputs over client-specific command names or tool names.
-- Keep each skill focused on one job. Put detailed background, examples, and long checklists in `references/`, and load them only when the workflow needs them.
-- Treat client-specific fields and files as adapters around the shared workflow, not as the only place where essential behavior is defined. If one client ignores a client-specific field or file, the skill should still work or clearly state the remaining limitation.
-- Treat `allowed-tools` as client-dependent permission metadata, not a portable tool restriction. In Claude Code it pre-approves the listed tools but does not prevent other tools from being used under normal permission rules; Codex does not document support for it, so assume Codex may ignore it and use each client's permission or deny policy for restrictions.
+## Sources of truth
 
-### Invocation control example
+- Use the [Agent Skills specification](https://agentskills.io/specification) for the portable `SKILL.md` format.
+- Use the current [Claude Code skill documentation](https://code.claude.com/docs/en/skills) and [Codex skill documentation](https://developers.openai.com/codex/skills) for client-specific behavior.
+- Re-check the official documentation before adding or changing a client-specific field. Do not rely on remembered behavior.
+- `AGENTS.md` is canonical for repository instructions. Keep `CLAUDE.md` as its symlink so both agents read the same rules.
 
-| Intent | Claude Code | Codex | Shared-skill guidance |
-| --- | --- | --- | --- |
-| User and model may invoke | Default; users type `/skill-name` | Default; users mention `$skill-name` | Prefer this portable default. |
-| Only the user should invoke | Set `disable-model-invocation: true` in `SKILL.md` | Set `policy.allow_implicit_invocation: false` in `agents/openai.yaml` | Include both settings when explicit-only behavior is required. |
-| Only the model should invoke | Set `user-invocable: false` in `SKILL.md`; this hides the skill from the `/` menu | No documented equivalent for hiding explicit invocation while retaining implicit invocation | Do not rely on this behavior in a shared skill. Make explicit invocation harmless and document the difference. |
+## Repository structure
 
-For an explicit-only shared skill, pair the Claude Code frontmatter with the Codex metadata:
+- Published skills live under `skills/`. A skill is the directory that directly contains its `SKILL.md`; that directory name must match the skill's `name`.
+- A skill may include `scripts/` for deterministic or repeated operations, `references/` for material loaded on demand, and `assets/` for templates, images, icons, data, and other static resources used by the skill or client metadata.
+- A skill may include `agents/openai.yaml` for Codex-specific metadata such as display information or invocation policy. This is skill metadata, not a plugin manifest.
+- `README.md` is the public catalog and installation guide. It should let a visitor understand what each skill does, choose one, and install it for Claude Code or Codex.
+- Do not add empty skill directories, placeholder skills, or unfinished skills to `main`.
 
-```yaml
-# SKILL.md
----
-name: deploy
-description: Deploys the application after required checks. Use only when the user explicitly requests a deployment.
-disable-model-invocation: true
----
-```
+## Writing skills
 
-```yaml
-# agents/openai.yaml
-policy:
-  allow_implicit_invocation: false
-```
+- Read the complete target `SKILL.md` and every directly relevant supporting file before changing a skill.
+- Keep each skill focused on one job. Split unrelated workflows instead of accumulating them in one entry point.
+- Write a concise `description` that states what the skill does and when it should be used. Front-load the terms most likely to match a real request.
+- Write the body as direct instructions with clear inputs, outputs, decision points, and completion criteria.
+- Prefer agent-neutral language in the shared workflow. Name Claude Code or Codex only when their behavior actually differs.
+- Keep `SKILL.md` concise and use progressive disclosure. Move branch-specific detail, long examples, and reference material into linked files under `references/`.
+- Use scripts only when deterministic behavior, repeated parsing, or external tooling makes prose instructions insufficient. Test every added or changed script.
+- Keep each rule or fact in one authoritative place. Do not duplicate the full workflow across `SKILL.md`, supporting files, and README prose.
 
-## Working conventions
+## Claude Code and Codex compatibility
 
-- Work directly on `main`. Commit completed changes and push `main` to `origin`; do not create a feature branch or pull request unless Yunfei asks.
-- Keep every repository-facing document in English and soft-wrap it: one physical line per paragraph or list item.
-- Read the complete target `SKILL.md` and its directly relevant references before changing a skill.
-- Write skills for both Claude Code and Codex. Prefer agent-neutral language and shared operations; when an instruction must differ, identify the agent and provide an equivalent path for the other one.
-- When adding, removing, or materially changing a published skill, update the relevant `README.md` documentation. Keep a skills list or install command in sync when the README includes one.
+- The core workflow of every published skill must work in both Claude Code and Codex.
+- When the clients express the same required behavior differently, include both configurations and keep them synchronized.
+- For a skill that only the user may invoke, set `disable-model-invocation: true` in `SKILL.md` for Claude Code and set `policy.allow_implicit_invocation: false` in `agents/openai.yaml` for Codex.
+- Do not depend on `user-invocable: false` for shared behavior because Codex has no documented equivalent that hides explicit invocation while preserving implicit invocation.
+- When no equivalent exists, keep the portable behavior safe and useful, then state the exact client-specific limitation. Do not silently give the two clients different workflows.
+- Do not treat client-specific tool permission fields as portable security boundaries. Verify enforcement in each client and use the client's own permission or deny controls when a restriction must be guaranteed.
+
+## Documentation
+
+- List every published skill in `README.md` with a one-line human-facing summary linked to its `SKILL.md`.
+- Update README whenever a skill is added, removed, renamed, materially changed, or installed differently.
+- Show only Claude Code and Codex installation and invocation paths.
+- Keep repository-facing writing in English and soft-wrap it: one physical line per paragraph or list item.
 
 ## Validation
 
-- Check that every referenced local file exists and that the README matches the directory names under `skills/`.
-- Validate YAML frontmatter and the portable Agent Skills fields.
-- When client-specific behavior changes, test it in current Claude Code and Codex versions when practical. If one side cannot be tested, name the exact unverified behavior.
-- Confirm that client-specific configuration has an equivalent for the other client where one exists, and that unsupported differences are documented instead of implied to be portable.
+Before committing:
+
+- Validate every skill against the Agent Skills specification with `skills-ref validate <skill-directory>` when available or an equivalent schema check. At minimum, verify valid YAML, a matching 1-64 character lowercase alphanumeric-and-hyphen `name` with no leading, trailing, or consecutive hyphen, and a non-empty `description` of at most 1,024 characters that explains both purpose and usage.
+- Check that every referenced local file exists and every relative path resolves from the skill directory.
+- Check that README matches the published skills under `skills/`.
+- Run every relevant script or validation command supplied by the changed skill.
+- When client-specific metadata or invocation behavior changes, test discovery and invocation in current Claude Code and Codex versions when practical. If one side cannot be tested, name the exact unverified behavior.
+- Check that the change adds no plugin machinery and no support surface for coding agents outside Claude Code and Codex.
+- Run `git diff --check`.
