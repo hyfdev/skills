@@ -1,0 +1,13 @@
+{
+  "skills": ["hyfdev-rolldown-trust-review"],
+  "setup": "Use a PR previously reviewed with at least one finding, where the author has since pushed commits addressing it and autofix.ci has pushed a formatting commit. Substitute its number for <N>.",
+  "query": "The author responded to my review and pushed new commits (one is from autofix.ci). Re-review rolldown/rolldown PR #<N> and decide.",
+  "expected_behavior": [
+    "Diffs the new head against the previously reviewed head (git range-diff or equivalent) instead of re-reviewing from memory or trusting the author's reply alone",
+    "Treats the author's response as evidence: withdraws or narrows the satisfied finding only after rerunning the relevant proof",
+    "States whether the new head materially changes reviewed behavior, and runs a fresh proportional adversarial pass if it does",
+    "Re-pins the exact head immediately before publishing, accounting for possible further autofix.ci mutation",
+    "Approves per the Verdict rule when no blocker remains, and resolves satisfied threads only when authorized",
+    "Reads the submitted review back to confirm state, head, and comment placement, or presents the exact prepared output in read-only mode"
+  ]
+}

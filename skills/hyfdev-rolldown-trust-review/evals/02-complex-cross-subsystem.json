@@ -1,0 +1,13 @@
+{
+  "skills": ["hyfdev-rolldown-trust-review"],
+  "setup": "Pick a rolldown/rolldown PR that crosses subsystems (for example crates/rolldown plus crates/rolldown_binding or packages/rolldown) and includes snapshot or generated-file changes. Substitute its number for <N>.",
+  "query": "Review rolldown/rolldown PR #<N>. I want a thorough review before merging.",
+  "expected_behavior": [
+    "Classifies the PR as complex, tells the user, and dispatches two fresh subagents in parallel with contamination-free prompts",
+    "Regenerates changed snapshots or generated files using the commands in references/rolldown-repo.md instead of accepting large generated diffs by inspection",
+    "Does not report a breaking rolldown_* Rust API change with updated in-repo callers as a finding (the crates do not follow semver)",
+    "Keeps any discovered pre-existing problem out of the GitHub findings unless the PR claims to fix it or materially worsens it, and states provenance when it is in scope",
+    "Verifies every subagent finding itself before including it; unverified suspicions appear only in the user report's residual-uncertainty section",
+    "Produces the user-facing report with all seven required elements"
+  ]
+}

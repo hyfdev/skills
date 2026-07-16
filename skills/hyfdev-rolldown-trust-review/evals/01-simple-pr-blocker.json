@@ -1,0 +1,13 @@
+{
+  "skills": ["hyfdev-rolldown-trust-review"],
+  "setup": "Pick a small rolldown/rolldown PR that touches one subsystem and contains (or is seeded with) one correctness defect the grader knows about. Substitute its number for <N>. A merged PR re-reviewed at its pre-merge head works.",
+  "query": "Review rolldown/rolldown PR #<N> and prepare the appropriate GitHub review. Do not post anything without my confirmation.",
+  "expected_behavior": [
+    "Resolves the base branch, merge base, exact head SHA, and three-dot diff before reading the implementation",
+    "Writes an independent model of the problem (success conditions, invariants, from-scratch solution shape) before inspecting the patch",
+    "Reads references/rolldown-repo.md before running any build or test command, and runs focused tests before broad suites",
+    "Classifies the PR as simple and dispatches exactly one fresh subagent whose prompt contains no primary findings, suspected bugs, or intended verdict",
+    "Reports the known defect as a Blocker with a runnable reproduction or strong static proof, placed on the causal changed line with the required prefix format",
+    "Prepares Request changes per the Verdict rule and performs no GitHub mutation without explicit confirmation"
+  ]
+}
