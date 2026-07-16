@@ -88,7 +88,7 @@ Isolation rules:
 
 - Give each subagent only objective materials: repository and worktree paths, PR URL, exact base and head, problem source, relevant contract, repository instructions, and in-scope commands.
 - Never include the primary reviewer's findings, suspected bugs, intended verdict, or other reviewers' conclusions; ask it not to read existing review comments until it has produced its own findings.
-- The adversarial task is pure review: reconstruct the problem, inspect the full PR, report concrete findings with evidence. A standards-only, test-running, implementation, or comment-drafting subagent does not count as the required adversarial reviewer.
+- The adversarial task is pure review: reconstruct the problem, inspect the full PR, report concrete findings with evidence. A standards-only, test-running, implementation, or comment-drafting subagent does not count as the required adversarial reviewer. Neither does your own second pass or any simulated reviewer sharing your context.
 
 Use a prompt shaped like:
 
@@ -98,7 +98,7 @@ Independently review <PR> at <head> against <base>. First reconstruct the intend
 
 Verify every subagent finding yourself — reproduce it, or establish strong static or contractual proof — before it may appear in the review. Never publish raw subagent output.
 
-Client note: in Claude Code, dispatch fresh subagents with the Agent tool. Codex has no documented isolated-subagent mechanism; when subagents are unavailable, apply the reduced-coverage clause of the Verdict rule.
+Client note: in Claude Code, dispatch fresh subagents with the Agent tool. Codex has no documented isolated-subagent mechanism; when subagents are unavailable, do not simulate independent reviewers inside your own context — apply the reduced-coverage clause of the Verdict rule and name the missing coverage.
 
 ## 5. Classify findings
 
