@@ -98,7 +98,7 @@ Independently review <PR> at <head> against <base>. First reconstruct the intend
 
 Verify every subagent finding yourself — reproduce it, or establish strong static or contractual proof — before it may appear in the review. Never publish raw subagent output.
 
-Client note: in Claude Code, dispatch fresh subagents with the Agent tool. Codex has no documented isolated-subagent mechanism; when subagents are unavailable, do not simulate independent reviewers inside your own context — apply the reduced-coverage clause of the Verdict rule and name the missing coverage.
+Client note: in Claude Code, dispatch fresh subagents with the Agent tool. In Codex, delegate each independent reviewer to its own subagent thread; Codex subagents run with isolated context. Only if isolated subagents are genuinely unavailable in the running client: do not simulate independent reviewers inside your own context — apply the reduced-coverage clause of the Verdict rule and name the missing coverage.
 
 ## 5. Classify findings
 
