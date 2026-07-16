@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rolldown Trust Review"
+  short_description: "Evidence-backed Rolldown PR review"
+  default_prompt: "Use $hyfdev-rolldown-trust-review to review this Rolldown PR and prepare the appropriate GitHub review."
