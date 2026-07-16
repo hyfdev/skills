@@ -25,6 +25,7 @@ This repository is Yunfei He's public collection of reusable coding-agent skills
 - A skill may include `agents/openai.yaml` for Codex-specific metadata such as display information or invocation policy. This is skill metadata, not a plugin manifest.
 - `README.md` is the public catalog and installation guide. It should let a visitor understand what each skill does, choose one, and install it for Claude Code or Codex.
 - Do not add empty skill directories, placeholder skills, or unfinished skills to `main`.
+- Do not add evals, staged test scenarios, or answer keys to a skill, even when a skill-authoring methodology demands them. Full scenario runs are too costly to re-run, so such files rot instead of preventing regressions. Verify a skill change with the cheapest sufficient evidence — schema checks, fact checks against the target repository's current state, a capped live probe of discovery and early behavior — record that evidence in the pull request, and treat real usage as the ongoing test: when a skill misbehaves in real work, fix it then.
 
 ## Writing skills
 
