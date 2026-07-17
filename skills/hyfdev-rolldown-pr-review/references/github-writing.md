@@ -4,7 +4,7 @@ GitHub review prose is for the author, not a record of how much work the reviewe
 
 ## Review body
 
-A clean approval needs little or no body. When a short explanation helps, talk about why the code is sound rather than listing verification mechanics.
+A clean approval needs little or no body beyond the signature line. When a short explanation helps, talk about why the code is sound rather than listing verification mechanics.
 
 Avoid:
 
@@ -15,6 +15,8 @@ Prefer:
 > The range validation rejects non-contiguous layouts before the relocation splice runs, and the regression tests cover the failure modes reported after #10311. This looks good overall.
 >
 > I left one note about the same-point zero-width case.
+>
+> — AI review by claude-opus-4-1
 
 The first version reports reviewer activity. The second tells the author why the change is safe and where to look next. Omit the second paragraph when there is no inline note worth calling out.
 
