@@ -4,7 +4,7 @@ GitHub review prose is for the author, not a record of how much work the reviewe
 
 ## Review body
 
-A clean approval needs little or no body. When a short explanation helps, talk about why the code is sound rather than listing verification mechanics.
+A clean approval needs little or no body beyond the signature line. When a short explanation helps, talk about why the code is sound rather than listing verification mechanics.
 
 Avoid:
 
