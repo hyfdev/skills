@@ -12,7 +12,7 @@ Avoid:
 
 Prefer:
 
-> The new adjacency walk rejects the corrupting layouts before rewiring, and the regression tests cover the cases reported after #10311. This looks good overall.
+> The range validation rejects non-contiguous layouts before the relocation splice runs, and the regression tests cover the failure modes reported after #10311. This looks good overall.
 >
 > I left one note about the same-point zero-width case.
 
@@ -28,9 +28,9 @@ Avoid:
 
 Prefer:
 
-> `relocate(1, 1, 1)` still throws before this zero-width no-op runs.
+> `relocate(1, 1, 1)` still returns an error before this zero-width no-op runs.
 >
-> That makes zero-width moves depend on `to`: `relocate(1, 1, 0)` succeeds, while `relocate(1, 1, 1)` throws. The PR describes zero-width moves as no-ops, although the latter matches upstream `magic-string`.
+> That makes zero-width moves depend on `to`: `relocate(1, 1, 0)` succeeds, while `relocate(1, 1, 1)` returns an error. The PR describes zero-width moves as no-ops, although the latter matches upstream `magic-string`.
 >
 > Adding a test for the same-point case would make the intended behavior clear. If all zero-width moves are meant to be no-ops, moving this check above the containment guard is one possible way to make that behavior consistent.
 
