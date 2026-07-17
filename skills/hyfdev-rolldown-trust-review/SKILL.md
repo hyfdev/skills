@@ -25,7 +25,7 @@ This is the single authoritative verdict rule; every other section defers to it.
 
 ## Checklist
 
-Copy this into your response and check items off as you complete them:
+Track these steps internally. Use brief progress updates during a long review, but do not paste the checklist into GitHub output or the final handoff unless the user asks for it.
 
 ```
 Review progress:
@@ -106,20 +106,28 @@ Client note: dispatch each reviewer with your client's isolation mechanism (Clau
 - **Important (non-blocking)** — a real issue that may be fixed now or tracked as follow-up.
 - **Nit (optional)** — low-impact documentation, naming, cleanup, or style.
 
-Unverified suspicions never become GitHub findings; put material unverified coverage in the residual-uncertainty section of the user-facing report.
+Unverified suspicions never become GitHub findings; mention unverified coverage in the user-facing handoff only when it is material to the verdict or next step.
 
 ## 6. Draft inline comments
 
 - Put each finding on the causal changed line; use a file-level comment or a short review-body item only when no meaningful changed line exists.
 - Combine symptoms sharing one root cause into one comment; skip anything formatter, lint, or CI already reports; reply to an existing thread instead of opening a duplicate.
-- Prefix every comment with importance and nature: `Blocker (correctness; must fix before merge):`, `Important (compatibility; non-blocking):`, `Nit (docs; optional):`.
-- State the observable problem, affected conditions, impact, and evidence before discussing a fix. Offer a fix direction with its validation boundary — `One possible direction is …; I verified X but not Y; please validate against …` — and make explicit that the author must validate it independently.
-- Keep the GitHub review concise; detailed teaching, the solution comparison, and the full evidence trail go in the user-facing report.
+- Before drafting any GitHub prose, read [references/github-writing.md](references/github-writing.md).
+- Lead with the code behavior or consequence the author needs to understand. Include only the conditions, impact, and proof needed to make that point credible; do not turn every finding into a fixed checklist of fields.
+- Keep the required outcome separate from a possible implementation. A fix direction is an example that may help, not an exhaustive menu or an instruction to choose one of the reviewer's options.
+- Use declarative sentences in every finding. State behavior that must hold directly, and phrase optional advice as a statement about its benefit. Do not carry either one in a question-shaped request such as `Could we …?` or `Can you …?`, or a polite command such as `Please …`; these forms often read as requirements while hiding whether the point is required or optional.
+- Let the review event carry the verdict. Lead with the code behavior rather than a severity prefix such as `Important (contract; non-blocking):`. If the finding's effect on the verdict could still be misunderstood, add a complete sentence such as `This blocks merge.` or `This does not block this approval.` after the consequence; do not turn it into a label at the start of the finding.
+- Use short paragraphs with one purpose each: the observation first, the minimum proof or context next, and an optional direction last. Use bullets when several independent conditions or reproductions would otherwise form a dense paragraph.
+- Keep reviewer-process metadata out of author-facing prose unless it changes the verdict or tells the author what to do. Exact SHAs, merge bases, reviewer counts, command inventories, routine skipped checks, and irrelevant flaky CI belong in the internal record or user handoff.
+- Mention a validation boundary only when the missing coverage could change the finding or the author's next step. Do not append ritual disclaimers that the author must validate the work independently.
 
 ## 7. Publish
 
 - Re-pin immediately before submitting: exact head SHA, unresolved threads, CI, and pending mutating automation (rolldown's autofix.ci bot pushes commits to PR branches; see references/rolldown-repo.md).
-- Review body: intended verdict, what was verified, and material residual uncertainty, sorted by importance; do not duplicate every inline comment.
+- The GitHub review state and `commit_id` already record the verdict and reviewed head. Write the body for the author: explain why the change is safe or summarize the blocking consequence. Do not repeat `Approve`, the full SHA, or the review process as an audit log.
+- A clean approval may need only one natural sentence, or no body when it adds no useful context. An approval with inline notes should briefly explain why the PR is safe overall and mention a note only when it helps the author read the review. A Request changes body should summarize the blockers by consequence without duplicating every inline comment.
+- Include residual uncertainty only when it could change the verdict or gives the author a concrete next step. Routine local coverage omitted because equivalent CI passed is not material by itself.
+- Before publishing, make one prose-only pass: remove sentences whose only purpose is to show reviewer effort, split paragraphs that make more than one point, and confirm that every optional implementation idea still reads as optional.
 - `gh pr review` cannot attach inline comments. When authorized, submit the whole review as one call:
 
 ```bash
@@ -132,7 +140,7 @@ gh api repos/<owner>/<repo>/pulls/<number>/reviews --input review.json
   "event": "REQUEST_CHANGES",
   "body": "<review summary>",
   "comments": [
-    { "path": "crates/rolldown/src/x.rs", "line": 42, "side": "RIGHT", "body": "Blocker (correctness; must fix before merge): …" },
+    { "path": "crates/rolldown/src/x.rs", "line": 42, "side": "RIGHT", "body": "This can emit an importer before its dependency, so the generated bundle throws during startup. …" },
     { "path": "crates/rolldown/src/y.rs", "start_line": 10, "start_side": "RIGHT", "line": 14, "side": "RIGHT", "body": "…" }
   ]
 }
@@ -149,12 +157,6 @@ gh api repos/<owner>/<repo>/pulls/<number>/reviews --input review.json
 - Reply to and resolve satisfied threads when authorized; do not leave stale findings open.
 - Decide per the Verdict rule.
 
-## User-facing report
+## User-facing handoff
 
-1. The PR's intent and the problem it must solve.
-2. Your independent from-scratch solution shape and how the PR compares; state this even when they match.
-3. The evidence and commands that informed the review.
-4. Findings ordered by importance.
-5. Residual uncertainty and unavailable coverage.
-6. The simple or complex classification and the number of independent reviewers used.
-7. The final verdict and any GitHub actions taken or prepared.
+Lead with the verdict, the concrete findings, and any GitHub action taken. Then give enough evidence for the user to trust the decision, including the from-scratch comparison when it explains why the implementation is sound. Mention independent reviewer count and unavailable coverage after the conclusion, and only when useful. Adapt the structure to the review; do not force a seven-part report, paste the internal checklist, or narrate every command.
