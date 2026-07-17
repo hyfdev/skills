@@ -1,9 +1,9 @@
 ---
-name: hyfdev-rolldown-trust-review
+name: hyfdev-rolldown-pr-review
 description: Reviewer-side review of rolldown/rolldown pull requests and PR stacks that ends in an evidence-backed Approve or Request changes decision. Use whenever the user asks to review, adversarially review, re-review, approve, request changes on, or decide whether to merge a Rolldown PR or stack. Do not use for implementing fixes or for addressing review comments received on the user's own PR.
 ---
 
-# Rolldown Trust Review
+# Rolldown PR Review
 
 Perform a reviewer-side review that gives the maintainer enough evidence to trust the verdict. Rolldown-specific commands, CI facts, and review policies live in [references/rolldown-repo.md](references/rolldown-repo.md); read it at the start of every review — its policy and CI sections shape findings even when you run no commands.
 

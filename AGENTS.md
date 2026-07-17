@@ -30,6 +30,10 @@ This repository is Yunfei He's public collection of reusable coding-agent skills
 ## Writing skills
 
 - Read the complete target `SKILL.md` and every directly relevant supporting file before changing a skill.
+- Treat a skill's `name` as its public installation identifier. Public standalone skill names start with the stable `hyfdev-` publisher prefix, followed by a short, natural task phrase; include a product or domain only when the workflow depends on it, as in `hyfdev-rolldown-pr-review`.
+- Do not put client names or subjective quality and method claims such as `trust`, `smart`, or `advanced` in a skill name. Add a role or version only when it distinguishes workflows that must coexist.
+- Keep client UI metadata natural and concise: `interface.display_name` omits the publisher prefix and names the task directly.
+- Treat a rename as an installation migration: update the directory, frontmatter, README, client metadata, installed copies, and lock state together. Do not leave a second alias with the same workflow.
 - Keep each skill focused on one job. Split unrelated workflows instead of accumulating them in one entry point.
 - Write a concise `description` that states what the skill does and when it should be used. Front-load the terms most likely to match a real request.
 - Write the body as direct instructions with clear inputs, outputs, decision points, and completion criteria.
