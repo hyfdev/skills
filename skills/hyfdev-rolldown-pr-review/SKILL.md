@@ -128,6 +128,7 @@ Unverified suspicions never become GitHub findings; mention unverified coverage 
 - A clean approval may need only one natural sentence, or no body when it adds no useful context. An approval with inline notes should briefly explain why the PR is safe overall and mention a note only when it helps the author read the review. A Request changes body should summarize the blockers by consequence without duplicating every inline comment.
 - Include residual uncertainty only when it could change the verdict or gives the author a concrete next step. Routine local coverage omitted because equivalent CI passed is not material by itself.
 - Before publishing, make one prose-only pass: remove sentences whose only purpose is to show reviewer effort, split paragraphs that make more than one point, and confirm that every optional implementation idea still reads as optional.
+- Sign everything the review publishes with the model that produced it. End the review body with a signature line naming the exact model your client reports, such as `— AI review by claude-opus-4-1`; when an approval would otherwise have no body, the signature line alone is the body. Append the same line to any comment posted outside a review, such as a file-level comment or a thread reply, since those have no review body to carry it. Inline comments inside a review need no individual signature.
 - `gh pr review` cannot attach inline comments. When authorized, submit the whole review as one call:
 
 ```bash
