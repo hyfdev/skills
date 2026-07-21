@@ -54,7 +54,7 @@ This repository is Yunfei He's public collection of reusable coding-agent skills
 ## Documentation
 
 - List every published skill in `README.md` with a one-line human-facing summary linked to its `SKILL.md`.
-- Give every listed skill its own copyable, non-interactive command that installs it globally for both Claude Code and Codex: `npx --yes skills@latest add hyfdev/skills --skill <skill-name> --global --agent claude-code --agent codex --yes`.
+- Give every listed skill its own copyable, non-interactive command that installs it globally for both Claude Code and Codex: `npx skills@latest add hyfdev/skills --skill <skill-name> -g -a claude-code -a universal -y`.
 - Update README whenever a skill is added, removed, renamed, materially changed, or installed differently.
 - Show only Claude Code and Codex installation and invocation paths.
 - Keep repository-facing writing in English and soft-wrap it: one physical line per paragraph or list item.

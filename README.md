@@ -11,7 +11,7 @@ Review Rolldown PRs with problem-first reasoning, independent adversarial review
 Install globally for Claude Code and Codex:
 
 ```bash
-npx --yes skills@latest add hyfdev/skills --skill hyfdev-rolldown-pr-review --global --agent claude-code --agent codex --yes
+npx skills@latest add hyfdev/skills --skill hyfdev-rolldown-pr-review -g -a claude-code -a universal -y
 ```
 
 ## License
