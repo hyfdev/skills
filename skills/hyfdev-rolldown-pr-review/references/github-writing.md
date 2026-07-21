@@ -16,9 +16,9 @@ Prefer:
 >
 > I left one note about the same-point zero-width case.
 >
-> — AI review by claude-opus-4-1
+> — Review by @<requesting-user-handle>, assisted by <exact-model>
 
-The first version reports reviewer activity. The second tells the author why the change is safe and where to look next. Omit the second paragraph when there is no inline note worth calling out.
+Replace the first placeholder with the GitHub handle of the user who sent the review request and actually reviewed or explicitly supervised the result, and the second with the exact model that produced it. The first version reports reviewer activity. The second tells the author why the change is safe and where to look next. Omit the second paragraph when there is no inline note worth calling out.
 
 ## Inline findings
 
