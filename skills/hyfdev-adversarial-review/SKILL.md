@@ -52,11 +52,11 @@ Return: pass, or at most five findings per direction, ranked by how much each wo
 
 ### Open
 
-Try to disprove this deliverable. Find anything that would make it wrong to accept as is: factual or logical errors, unsupported claims, missing evidence, behavior that differs from what was required, untested or broken paths, an overlooked alternative that would change the decision. Rank findings by how much they would change the result. Omit style. A missing defense against a threat the repository does not promise to handle is not a finding.
+Try to disprove this deliverable. Find anything that would make it wrong to accept as is: factual or logical errors, unsupported claims, missing evidence, behavior that differs from what was required, untested or broken paths, an overlooked alternative that would change the decision. Rank findings by how much they would change the result. Ignore purely cosmetic preferences. Flag avoidable repetition or complexity when simpler wording preserves what the intended reader needs to understand or decide. A missing defense against a threat the repository does not promise to handle is not a finding.
 
 ### Over-engineering
 
-Find what this deliverable contains that the request did not require: scope beyond the ask; an abstraction, option, or parameter with a single consumer; configuration or fallbacks for situations nobody asked for; defensive code against threats the repository does not promise to handle; tests or documentation for behavior this change did not introduce; hand-rolled code where the repository already has a helper or dependency. For each item, name what it costs and what the smaller version is.
+Find what this deliverable contains that the request did not require: scope beyond the ask; an abstraction, option, or parameter with a single consumer; configuration or fallbacks for situations nobody asked for; defensive code against threats the repository does not promise to handle; tests or documentation for behavior this change did not introduce; hand-rolled code where the repository already has a helper or dependency. For prose, accuracy and relevance do not establish necessity: check for repeated explanations or examples, and details that do not change what the reader needs to understand or decide. For each item, name what it costs and what the smaller version is; for prose, quote the text to cut or simplify and give the deletion or replacement, preserving needed explanations of correctness, scope, and tradeoffs.
 
 ### Residue
 
